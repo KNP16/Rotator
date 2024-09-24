@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rotating Paragraphs</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #ffffff;
+            background-color: transparent;
+            text-align: center;
+            font-size: 24px;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #text-container {
+            display: none;
+        }
+        .fade-in-out {
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .fade-in-out.visible {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div id="text-container" class="fade-in-out"></div>
+
+    <script>
+        // Array of paragraphs to rotate
+        const paragraphs = [
+            "Welcome to the stream!",
+            "Don't forget to follow and subscribe!",
+            "Thanks for your support!",
+            "Check out our social media links below.",
+            "Enjoy the stream and have fun!"
+        ];
+
+        let currentIndex = 0;
+        const textContainer = document.getElementById("text-container");
+
+        // Function to show the current paragraph with fade effect
+        function showParagraph() {
+            textContainer.textContent = paragraphs[currentIndex];
+            textContainer.classList.add("visible");
+
+            setTimeout(() => {
+                textContainer.classList.remove("visible");
+            }, 4000); // Text will be visible for 4 seconds
+
+            // Move to the next paragraph after a pause
+            setTimeout(() => {
+                currentIndex = (currentIndex + 1) % paragraphs.length;
+                showParagraph();
+            }, 5000); // Switch to the next paragraph every 5 seconds
+        }
+
+        // Start the rotation
+        window.onload = () => {
+            textContainer.style.display = "block";
+            showParagraph();
+        };
+    </script>
+</body>
+</html>
